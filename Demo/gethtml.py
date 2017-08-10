@@ -16,7 +16,7 @@ def getImage(htmls):
     x = 0
     b = b'/:?='
     for im in imagelist:
-        print(im)
+        print(urllib.parse.quote(im[2:], b))
         # urllib.request.urlretrieve(urllib.parse.quote(im[2:], b), 'D:\pythonProject\image\%s.jpg' % x)
         x+=1
     return x
