@@ -1,7 +1,9 @@
-# -*- coding: utf-8 -*-
+#coding=utf-8
 import urllib.request
 import re
 import random
+from matplotlib import pyplot as plt
+import matplotlib
 # 用户代理
 USER_AGENTS = [ "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; AcooBrowser; .NET CLR 1.1.4322; .NET CLR 2.0.50727)",
                 "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; Acoo Browser; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 3.0.04506)",
@@ -46,17 +48,49 @@ def getFileList(page):
         pattern = re.compile('<table.*?<b>.*?<a href="(.*?)" class="ulink">(.*?)</a>.*?</table>', re.S)
         items = re.findall(pattern, content)
         index = 1
+       
         for item in items:
-            print(str(index) + '片名:' + item[1])
+            #print(str(index) + '片名:' + item[1])
+            films.append(item[1])
             index += 1
             # print('ftp:'+str(gethref('http://www.dytt8.net'+item[0])[0]))
+
+            
         page += 1
     except urllib.request.URLError as e:
         print('except:', e)
     return page
 
+def count(target):
+    keywords=['剧情','奇幻','冒险','动作','喜剧','悬疑','科幻','动画','爱情','高分']
+    nums=[0,0,0,0,0,0,0,0,0,0]
+    for i in range(len(target)):
+        for j in range(len(keywords)):
+            if(target[i].find(keywords[j])>-1):
+                nums[j]=nums[j]+1
+    for i in range(len(nums)):
+        nums[i]=nums[i]/len(target)*100
+    # matplotlib.rcParams['font.sans-serif'] = ['Microsoft YaHei']   
+    # matplotlib.rcParams['font.family']='sans-serif' 
+    plt.bar(range(len(nums)),nums,color='g',tick_label=keywords)
+    plt.title('电影天堂数据分析')
+    #plt.ylabel('数量',fontproperties=font)
+    #plt.xlabel('关键词')
+    #plt.legend()
+    plt.yticks(())
+    plt.ylim(0, 50)
+    plt.show()
+
 if __name__ == '__main__':
+    films=[]
     page = 1
     page = getFileList(page)
-    while input('输入回车继续:') == '':
+    while page<10:
         page = getFileList(page)
+    count(films)
+    # with open('films.txt', 'w') as file:
+    #     for i in range(len(films)):
+    #         s +=  str(i+1) + '片名:' + films[i]+'\t\r'
+    #     file.write(s)
+    #     file.close()
+
