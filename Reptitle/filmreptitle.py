@@ -68,29 +68,28 @@ def count(target):
         for j in range(len(keywords)):
             if(target[i].find(keywords[j])>-1):
                 nums[j]=nums[j]+1
+                if j==3:
+                    comedies.append(i)
     for i in range(len(nums)):
         nums[i]=nums[i]/len(target)*100
-    # matplotlib.rcParams['font.sans-serif'] = ['Microsoft YaHei']   
-    # matplotlib.rcParams['font.family']='sans-serif' 
     plt.bar(range(len(nums)),nums,color='g',tick_label=keywords)
     plt.title('电影天堂数据分析')
-    #plt.ylabel('数量',fontproperties=font)
-    #plt.xlabel('关键词')
     #plt.legend()
-    plt.yticks(())
     plt.ylim(0, 50)
     plt.show()
 
 if __name__ == '__main__':
     films=[]
+    comedies=[]
     page = 1
     page = getFileList(page)
     while page<10:
         page = getFileList(page)
     count(films)
-    # with open('films.txt', 'w') as file:
-    #     for i in range(len(films)):
-    #         s +=  str(i+1) + '片名:' + films[i]+'\t\r'
-    #     file.write(s)
-    #     file.close()
+    s=''
+    with open('films.txt', 'w') as file:
+        for i in range(len(comedies)):
+            s +=  str(i+1) + '片名:' + films[comedies[i]]+'\t\r'
+        file.write(s)
+        file.close()
 
