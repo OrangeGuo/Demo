@@ -1,0 +1,2 @@
+import pkg
+pkg.test()
