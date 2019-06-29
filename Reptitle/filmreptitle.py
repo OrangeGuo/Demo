@@ -3,7 +3,7 @@ import urllib.request
 import re
 import random
 from matplotlib import pyplot as plt
-#import matplotlib
+import matplotlib
 # 用户代理
 USER_AGENTS = [ "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; AcooBrowser; .NET CLR 1.1.4322; .NET CLR 2.0.50727)",
                 "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; Acoo Browser; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 3.0.04506)",
@@ -38,7 +38,7 @@ def gethref(url_temp):
 def getFileList(page):
     try:
         if page == 1:
-            url = 'http://www.dytt8.net/html/gndy/dyzz/index.html'
+            url = 'https://www.baidu.com/index.html'
         else:
             url = 'http://www.dytt8.net/html/gndy/dyzz/list_23_' + str(page) + '.html'
         user_agent = random.choice(USER_AGENTS)
@@ -83,7 +83,7 @@ if __name__ == '__main__':
     comedies=[]
     page = 1
     page = getFileList(page)
-    while page<10:
+    while page<1:
         page = getFileList(page)
     count(films)
     s=''
