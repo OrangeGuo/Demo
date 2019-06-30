@@ -11,7 +11,7 @@ from scrapy.pipelines.images import ImagesPipeline
 
 class DemoPipeline(object):
     def __init__(self, *args, **kwargs):
-        self.file = open("move.json", "wb+")
+        self.file = open("movie.json", "wb+")
 
     def process_item(self, item, spider):
         content = json.dumps(dict(item), ensure_ascii=False)+",\n"
@@ -21,7 +21,7 @@ class DemoPipeline(object):
     def close_spider(self, spider):
         self.file.close()
 
-
+#TODO: save img with movie name
 class DoubanImagesPipeline(ImagesPipeline):
     def get_media_requests(self, item, info):
         yield scrapy.Request(item['img'])
