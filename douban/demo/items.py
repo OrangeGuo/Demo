@@ -19,6 +19,7 @@ class MovieItem(scrapy.Item):
     rate = scrapy.Field()
     comment = scrapy.Field()
     img = scrapy.Field()
+    url = scrapy.Field()
 
 class BookItem(scrapy.Item):
     name = scrapy.Field()

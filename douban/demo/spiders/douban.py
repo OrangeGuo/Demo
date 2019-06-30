@@ -22,8 +22,9 @@ class DoubanSpider(scrapy.Spider):
             movie['rate'] = item.xpath(
                 'div/div[2]/div[2]/div/span[2]/text()').extract()[0]
             movie['comment'] = item.xpath(
-                'div/div[2]/div[2]/div/span[4]/text()').extract()[0]
+                'div/div[2]/div[2]/div/span[4]/text()').extract()[0][:-3]
             movie['img'] = item.xpath('div/div[1]/a/img/@src').extract()[0]
+            movie['url'] = item.xpath('div/div[2]/div[1]/a/@href').extract()[0]
             items.append(movie)
             yield movie
         self.offset += 25

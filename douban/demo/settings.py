@@ -90,3 +90,4 @@ AUTOTHROTTLE_DEBUG = False
 HTTPCACHE_IGNORE_HTTP_CODES = [403]
 FEED_EXPORT_ENCODING = 'gb18030'
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+LOG_LEVEL = 'ERROR'
